@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zihad Portfolio - Enhanced Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#020617;color:#fff;overflow-x:hidden;cursor:none;}
+.cursor{width:20px;height:20px;border:2px solid #38bdf8;border-radius:50%;position:fixed;pointer-events:none;transform:translate(-50%,-50%);transition:0.1s;z-index:9999;}
+nav{position:fixed;width:100%;top:0;display:flex;justify-content:space-between;padding:15px 8%;background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);z-index:1000;}
+nav a{color:#fff;margin-left:15px;text-decoration:none;}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;}
+.hero::before{content:"";position:absolute;width:110%;height:110%;background:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085') center/cover;animation:zoom 20s infinite alternate;opacity:0.3;z-index:-1;}
+.hero h1{font-size:50px;background:linear-gradient(90deg,#38bdf8,#9333ea);-webkit-background-clip:text;color:transparent;}
+.hero p{margin-top:10px;}
+section{padding:80px 8%;opacity:0;transform:translateY(60px);transition:all 1s cubic-bezier(0.22,1,0.36,1);}
+section.show{opacity:1;transform:translateY(0);}
+h2{margin-bottom:20px;color:#38bdf8;}
+.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);padding:20px;border-radius:15px;margin-bottom:20px;transition:0.3s;}
+.bar{height:8px;background:#1e293b;border-radius:5px;margin-bottom:15px;overflow:hidden;}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,#38bdf8,#9333ea);width:0;transition:1.5s;}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card:hover{transform:translateY(-10px);}
+input,textarea,button,select{font-family:'Poppins',sans-serif;}
+input,textarea,select{width:100%;padding:12px;margin-bottom:10px;border:none;border-radius:8px;background:#1e293b;color:#fff;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:15px;border-radius:50%;color:#fff;text-decoration:none;z-index:1000;}
+footer{text-align:center;padding:20px;background:#020617;margin-top:40px;}
+footer a{color:#38bdf8;text-decoration:none;margin:0 5px;}
+#adminBtn{padding:8px 15px;border:none;border-radius:6px;background:rgba(56,189,248,0.3);color:#fff;cursor:pointer;transition:0.3s;}
+#adminBtn:hover{background:rgba(56,189,248,0.5);}
+#loginBox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:10000;pointer-events:auto;}
+#loginBox div{background:#1e293b;padding:30px;border-radius:10px;width:300px;text-align:center;position:relative;box-shadow:0 0 15px #38bdf8;}
+#loginBox input{width:100%;margin-top:10px;padding:10px;border-radius:5px;border:none;}
+#loginBox button{margin-top:10px;padding:10px 15px;border:none;border-radius:5px;background:linear-gradient(90deg,#38bdf8,#9333ea);color:#fff;cursor:pointer;transition:0.3s;}
+#loginBox button:hover{opacity:0.85;}
+#adminPanel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);overflow:auto;z-index:10000;padding:20px;}
+#adminPanel div{background:#111827;padding:20px;border-radius:10px;margin-bottom:20px;}
+#adminPanel h3{color:#38bdf8;margin-bottom:10px;}
+#adminPanel input, #adminPanel textarea{width:100%;padding:10px;margin-bottom:8px;border-radius:6px;border:none;background:#1e293b;color:#fff;}
+#adminPanel button{background:#38bdf8;border:none;padding:10px;border-radius:5px;color:#fff;cursor:pointer;margin-top:5px;}
+@media(max-width:600px){.hero h1{font-size:30px;}section{padding:60px 5%;}}
+@keyframes zoom{from{transform:scale(1);}to{transform:scale(1.1);}}
+</style>
+</head>
+<body>
+
+<div class="cursor"></div>
+
+<nav>
+<h3 contenteditable="false" id="siteLogo">Zihad</h3>
+<div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<div class="hero">
+<div>
+<h1 contenteditable="false" id="heroName">Zihad Hossain</h1>
+<p contenteditable="false" id="heroTitle">Aspiring Skilled Professional (Electrical | Welding)</p>
+</div>
+</div>
+
+<section id="about">
+<h2>About</h2>
+<div class="card" contenteditable="false" id="aboutText">
+I am a hardworking individual from Bangladesh passionate about electrical work, welding and technical skills.
+</div>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<div class="card" id="skillsCard"></div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects" id="projectsCard"></div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<div class="card" id="contactCard">
+<p>Email: <span contenteditable="false" id="contactEmail">zihad@example.com</span></p>
+<p>Phone: <span contenteditable="false" id="contactPhone">+8801407772066</span></p>
+<p>Location: <span contenteditable="false" id="contactLocation">Bangladesh</span></p>
+</div>
+</section>
+
+<a class="whatsapp" href="https://wa.me/8801407772066" target="_blank">💬</a>
+
+<footer>
+<p contenteditable="false" id="footerText">© 2026 Zihad Hossain | All Rights Reserved</p>
+<p>
+<a href="#" target="_blank" contenteditable="false" id="footerFB">Facebook</a> |
+<a href="https://wa.me/8801407772066" target="_blank" contenteditable="false" id="footerWA">WhatsApp</a>
+</p>
+<br>
+<button id="adminBtn">Admin Login</button>
+</footer>
+
+<div id="loginBox">
+<div>
+<h3>Admin Login</h3>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button id="loginSubmit">Login</button>
+<button onclick="closeLogin()">Cancel</button>
+</div>
+</div>
+
+<div id="adminPanel">
+<h2 style="color:#38bdf8;">Admin Panel</h2>
+<div>
+<h3>Login Password</h3>
+<input type="password" id="newPassword" placeholder="New Password">
+<button onclick="changePassword()">Change Password</button>
+</div>
+<div>
+<h3>Hero Section</h3>
+<input id="editHeroName" placeholder="Hero Name">
+<input id="editHeroTitle" placeholder="Hero Title">
+</div>
+<div>
+<h3>About Section</h3>
+<textarea id="editAbout"></textarea>
+</div>
+<div>
+<h3>Skills</h3>
+<div id="skillInputs"></div>
+<button onclick="addSkillInput()">Add Skill</button>
+</div>
+<div>
+<h3>Projects</h3>
+<div id="projectInputs"></div>
+<button onclick="addProjectInput()">Add Project</button>
+</div>
+<div>
+<h3>Contact Info</h3>
+<input id="editEmail" placeholder="Email">
+<input id="editPhone" placeholder="Phone">
+<input id="editLocation" placeholder="Location">
+</div>
+<div>
+<h3>Footer</h3>
+<input id="editFooterText" placeholder="Footer Text">
+<input id="editFooterFB" placeholder="Facebook Link Text">
+<input id="editFooterWA" placeholder="WhatsApp Link Text">
+</div>
+<button onclick="logout()">Logout</button>
+</div>
+
+<script>
+// Cursor
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove",e=>{cursor.style.top=e.clientY+"px";cursor.style.left=e.clientX+"px";});
+
+// Smooth Scroll
+document.querySelectorAll("nav a").forEach(link=>{link.addEventListener("click",function(e){e.preventDefault();const target=document.querySelector(this.getAttribute("href"));window.scrollTo({top:target.offsetTop-50,behavior:"smooth"});});});
+
+// Section animation
+const sections=document.querySelectorAll("section");
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting) entry.target.classList.add("show");});});
+sections.forEach(sec=>observer.observe(sec));
+
+// Data
+let skills=JSON.parse(localStorage.getItem("skills"))||[{title:"Electrical Work",percent:80},{title:"Welding",percent:65},{title:"Technical Problem Solving",percent:75}];
+let projects=JSON.parse(localStorage.getItem("projects"))||[{title:"Home Electrical Setup"},{title:"Welding Structure"},{title:"Self Learning Projects"}];
+let adminPassword=localStorage.getItem("adminPassword")||"admin";
+
+function loadSkills(){let html="";skills.forEach(s=>{html+=`<p>${s.title} (${s.percent}%)</p><div class="bar"><span data-width="${s.percent}%"></span></div>`;});document.getElementById("skillsCard").innerHTML=html;document.querySelectorAll(".bar span").forEach(span=>{span.style.width=span.dataset.width;});}
+function loadProjects(){let html="";projects.forEach(p=>{html+=`<div class="card">${p.title}</div>`;});document.getElementById("projectsCard").innerHTML=html;}
+loadSkills();loadProjects();
+
+// Load other content
+["aboutText","heroName","heroTitle","contactEmail","contactPhone","contactLocation","footerText","footerFB","footerWA"].forEach(id=>{let el=document.getElementById(id);el.innerText=localStorage.getItem(id)||el.innerText;});
+
+// Admin Login
+const loginBox=document.getElementById("loginBox"),adminPanel=document.getElementById("adminPanel");
+document.getElementById("adminBtn").addEventListener("click",()=>{loginBox.style.display="flex";});
+document.getElementById("loginSubmit").addEventListener("click",login);
+document.getElementById("pass").addEventListener("keypress",e=>{if(e.key==="Enter") login();});
+function closeLogin(){loginBox.style.display="none";}
+function login(){let u=document.getElementById("user").value,p=document.getElementById("pass").value;if(u==="admin" && p===adminPassword){loginBox.style.display="none";adminPanel.style.display="block";loadAdminInputs();}else{alert("Wrong Username or Password ❌");}}
+function logout(){adminPanel.style.display="none";}
+
+function loadAdminInputs(){document.getElementById("editHeroName").value=document.getElementById("heroName").innerText;document.getElementById("editHeroTitle").value=document.getElementById("heroTitle").innerText;document.getElementById("editAbout").value=document.getElementById("aboutText").innerText;document.getElementById("editEmail").value=document.getElementById("contactEmail").innerText;document.getElementById("editPhone").value=document.getElementById("contactPhone").innerText;document.getElementById("editLocation").value=document.getElementById("contactLocation").innerText;document.getElementById("editFooterText").value=document.getElementById("footerText").innerText;document.getElementById("editFooterFB").value=document.getElementById("footerFB").innerText;document.getElementById("editFooterWA").value=document.getElementById("footerWA").innerText;
+let skillHTML="";skills.forEach((s,i)=>{skillHTML+=`<input data-index="${i}" class="skillInput" placeholder="Skill Name" value="${s.title}"><input data-index="${i}" class="skillPerc" placeholder="Percentage" value="${s.percent}">`;});document.getElementById("skillInputs").innerHTML=skillHTML;
+let projHTML="";projects.forEach((p,i)=>{projHTML+=`<input data-index="${i}" class="projInput" placeholder="Project Title" value="${p.title}">`;});document.getElementById("projectInputs").innerHTML=projHTML;}
+
+// Live Edit
+["heroName","heroTitle","aboutText","contactEmail","contactPhone","contactLocation","footerText","footerFB","footerWA"].forEach(id=>{let el=document.getElementById(id);el.addEventListener("input",()=>{localStorage.setItem(id,el.innerText);});});
+
+function saveHero(){let n=document.getElementById("editHeroName").value,t=document.getElementById("editHeroTitle").value;document.getElementById("heroName").innerText=n;document.getElementById("heroTitle").innerText=t;localStorage.setItem("heroName",n);localStorage.setItem("heroTitle",t);}
+function saveAbout(){let v=document.getElementById("editAbout").value;document.getElementById("aboutText").innerText=v;localStorage.setItem("aboutText",v);}
+function addSkillInput(){skills.push({title:"New Skill",percent:0});loadAdminInputs();}
+function saveSkills(){document.querySelectorAll(".skillInput").forEach(inp=>{skills[parseInt(inp.dataset.index)].title=inp.value;});document.querySelectorAll(".skillPerc").forEach(inp=>{skills[parseInt(inp.dataset.index)].percent=parseInt(inp.value)||0;});localStorage.setItem("skills",JSON.stringify(skills));loadSkills();}
+function addProjectInput(){projects.push({title:"New Project"});loadAdminInputs();}
+function saveProjects(){document.querySelectorAll(".projInput").forEach(inp=>{projects[parseInt(inp.dataset.index)].title=inp.value;});localStorage.setItem("projects",JSON.stringify(projects));loadProjects();}
+function saveContact(){let e=document.getElementById("editEmail").value,p=document.getElementById("editPhone").value,l=document.getElementById("editLocation").value;document.getElementById("contactEmail").innerText=e;document.getElementById("contactPhone").innerText=p;document.getElementById("contactLocation").innerText=l;localStorage.setItem("contactEmail",e);localStorage.setItem("contactPhone",p);localStorage.setItem("contactLocation",l);}
+function saveFooter(){let ft=document.getElementById("editFooterText").value,fb=document.getElementById("editFooterFB").value,wa=document.getElementById("editFooterWA").value;document.getElementById("footerText").innerText=ft;document.getElementById("footerFB").innerText=fb;document.getElementById("footerWA").innerText=wa;localStorage.setItem("footerText",ft);localStorage.setItem("footerFB",fb);localStorage.setItem("footerWA",wa);}
+function changePassword(){let np=document.getElementById("newPassword").value;if(np.length<3){alert("Password too short");return;}adminPassword=np;localStorage.setItem("adminPassword",np);alert(
